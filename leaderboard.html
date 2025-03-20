@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard - FUNr</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .back-btn {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        .leaderboard {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+        th {
+            background-color: #252525;
+        }
+        tr:hover {
+            background-color: #252525;
+        }
+        .rank {
+            font-weight: bold;
+            text-align: center;
+        }
+        .rank-1 {
+            color: gold;
+        }
+        .rank-2 {
+            color: silver;
+        }
+        .rank-3 {
+            color: #cd7f32; /* bronze */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <button class="back-btn" onclick="goBack()">← Back</button>
+            <h1>Trader Leaderboard</h1>
+        </div>
+    </div>
+
+    <div class="leaderboard">
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Trader</th>
+                    <th>Portfolio Value</th>
+                    <th>Profit/Loss</th>
+                    <th>Best Trade</th>
+                </tr>
+            </thead>
+            <tbody id="leaderboard-data">
+                <!-- Leaderboard data will be generated here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Sample leaderboard data - in a real app, this would come from a database
+        const leaderboardData = [
+            { rank: 1, name: 'CryptoWhale', value: 58420, profitLoss: 484.2, bestTrade: 'MoonRocket +215%' },
+            { rank: 2, name: 'DiamondHands', value: 43750, profitLoss: 337.5, bestTrade: 'DogeAI +189%' },
+            { rank: 3, name: 'TokenMaster', value: 36890, profitLoss: 268.9, bestTrade: 'RocketMoon +156%' },
+            { rank: 4, name: 'CoinCollector', value: 28940, profitLoss: 189.4, bestTrade: 'MegaSwap +143%' },
+            { rank: 5, name: 'PumpHunter', value: 25730, profitLoss: 157.3, bestTrade: 'SpaceX +124%' },
+            { rank: 6, name: 'SatoshiJr', value: 21650, profitLoss: 116.5, bestTrade: 'BabyDoge +105%' },
+            { rank: 7, name: 'MoonMan', value: 19870, profitLoss: 98.7, bestTrade: 'GemX +92%' },
+            { rank: 8, name: 'ChartWizard', value: 18450, profitLoss: 84.5, bestTrade: 'UltraToken +87%' },
+            { rank: 9, name: 'You', value: 0, profitLoss: 0, bestTrade: '-' },
+            { rank: 10, name: 'CryptoNewbie', value: 9120, profitLoss: -8.8, bestTrade: 'FlokiMeme +24%' }
+        ];
+
+        // Function to populate leaderboard
+        function populateLeaderboard() {
+            const leaderboardBody = document.getElementById('leaderboard-data');
+            
+            // Get user's data from localStorage
+            const balance = parseFloat(localStorage.getItem('balance')) || 10000;
+            const portfolio = JSON.parse(localStorage.getItem('portfolio')) || [];
+            let portfolioValue = balance;
+            let bestTrade = '-';
+            let bestTradePercentage = 0;
+            
+            // Calculate portfolio value and find best trade
+            portfolio.forEach(holding => {
+                const coinData = JSON.parse(localStorage.getItem(`coin_${holding.coinId}`)) || { currentPrice: 0.0001 };
+                portfolioValue += holding.amount * coinData.currentPrice;
+                
+                const tradeProfit = (holding.amount * coinData.currentPrice - holding.investment) / holding.investment * 100;
+                if (tradeProfit > bestTradePercentage) {
+                    bestTradePercentage = tradeProfit;
+                    bestTrade = `${coinData.name || 'Unknown'} +${tradeProfit.toFixed(0)}%`;
+                }
+            });
+            
+            // Update user's position in leaderboard
+            const userPosition = leaderboardData.find(entry => entry.name === 'You');
+            if (userPosition) {
+                userPosition.value = portfolioValue;
+                userPosition.profitLoss = ((portfolioValue - 10000) / 10000 * 100);
+                userPosition.bestTrade = bestTrade;
+                
+                // Sort leaderboard
+                leaderboardData.sort((a, b) => b.value - a.value);
+                
+                // Update ranks
+                leaderboardData.forEach((entry, index) => {
+                    entry.rank = index + 1;
+                });
+            }
+            
+            // Populate table
+            leaderboardBody.innerHTML = '';
+            leaderboardData.forEach(entry => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="rank ${entry.rank <= 3 ? 'rank-' + entry.rank : ''}">${entry.rank}</td>
+                    <td>${entry.name === 'You' ? '<strong>You</strong>' : entry.name}</td>
+                    <td>$${entry.value.toLocaleString()}</td>
+                    <td style="color:${entry.profitLoss >= 0 ? '#64f291' : '#ff4d4d'}">${entry.profitLoss >= 0 ? '+' : ''}${entry.profitLoss.toFixed(1)}%</td>
+                    <td>${entry.bestTrade}</td>
+                `;
+                leaderboardBody.appendChild(row);
+            });
+        }
+
+        // Go back to main page
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+
+        // Initialize
+        window.onload = function() {
+            populateLeaderboard();
+        };
+    </script>
+</body>
+</html>
+

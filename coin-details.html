@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUN -  | 2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-primary: #030303;
+            --bg-secondary: #0f0f11;
+            --bg-tertiary: #16161a;
+            --accent: #36BFFA;
+            --accent-gradient: linear-gradient(135deg, #36BFFA, #2563EB);
+            --text-primary: #f5f5f7;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.5);
+            --border: rgba(255, 255, 255, 0.08);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --positive: rgb(52, 211, 153);
+            --negative: rgb(239, 68, 68);
+            --positive-bg: rgba(52, 211, 153, 0.1);
+            --negative-bg: rgba(239, 68, 68, 0.1);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f5f5f7;
+            --bg-secondary: #fafafa;
+            --bg-tertiary: #ffffff;
+            --text-primary: #050505;
+            --text-secondary: rgba(0, 0, 0, 0.7);
+            --text-tertiary: rgba(0, 0, 0, 0.5);
+            --border: rgba(0, 0, 0, 0.08);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Pixelify Sans", sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+            background-color: rgba(3, 3, 3, 0.8);
+        }
+
+        .back-btn {
+            background: var(--accent-gradient);
+            color: #000;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: "Pixelify Sans", sans-serif;
+            letter-spacing: 0.025em;
+            font-size: 0.875rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(54, 191, 250, 0.3);
+        }
+
+        .header span {
+            font-feature-settings: "tnum";
+            font-variant-numeric: tabular-nums;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+        }
+
+        /* Main content section */
+        .section {
+            background-color: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(5px);
+        }
+
+        /* Coin details */
+        .coin-details {
+            background-color: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .coin-header {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .coin-icon {
+            width: 48px;
+            height: 48px;
+            margin-right: 1rem;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--bg-primary);
+        }
+
+        .coin-info {
+            flex-grow: 1;
+        }
+
+        .coin-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+        }
+
+        .coin-ticker {
+            color: var(--text-tertiary);
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* Price and change */
+        .price-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .current-price {
+            font-feature-settings: "tnum";
+            font-variant-numeric: tabular-nums;
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .price-change {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .price-up {
+            background-color: var(--positive-bg);
+            color: var(--positive);
+        }
+
+        .price-down {
+            background-color: var(--negative-bg);
+            color: var(--negative);
+        }
+
+        /* Statistics */
+        .coin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stat-card {
+            background-color: var(--bg-tertiary);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+        }
+
+        .stat-title {
+            color: var(--text-tertiary);
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-value {
+            font-feature-settings: "tnum";
+            font-variant-numeric: tabular-nums;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Chart */
+        .chart-container {
+            width: 100%;
+            height: 400px;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        #chart {
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+        
+        /* Profit Statistics */
+        .profit-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding: 15px;
+            background-color: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            margin-bottom: 20px;
+        }
+        
+        .stat-item {
+            padding: 10px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background-color: var(--bg-tertiary);
+        }
+        
+        /* PnL Container */
+        .pnl-container {
+            background-color: var(--bg-tertiary);
+            padding: 20px;
+            border-radius: var(--radius-md);
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+        }
+        
+        .pnl-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .pnl-item {
+            background-color: var(--bg-secondary);
+            padding: 15px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+        }
+        
+        .pnl-label {
+            color: var(--text-tertiary);
+            margin-bottom: 5px;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .pnl-value {
+            font-feature-settings: "tnum";
+            font-variant-numeric: tabular-nums;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        
+        .pnl-chart-container {
+            height: 150px;
+            margin-top: 15px;
+            background-color: var(--bg-secondary);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        /* News Feed */
+        .news-feed {
+            background-color: var(--bg-tertiary);
+            padding: 20px;
+            border-radius: var(--radius-md);
+            margin-top: 20px;
+            border: 1px solid var(--border);
+        }
+        
+        .news-item {
+            padding: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Trading panel */
+        .trading-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 1.5rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .trade-form {
+            background-color: var(--bg-tertiary);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+        }
+
+        .trade-form h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-tertiary);
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+            transition: var(--transition);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(54, 191, 250, 0.2);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.875rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .btn-buy {
+            background: var(--accent-gradient);
+            color: #000;
+        }
+
+        .btn-sell {
+            background-color: var(--negative);
+            color: white;
+        }
+
+        .btn-buy:hover, .btn-sell:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+            }
+            
+            .trading-panel {
+                grid-template-columns: 1fr;
+            }
+            
+            .coin-stats, .pnl-details, .profit-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .coin-stats, .pnl-details, .profit-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightweight-charts/3.8.0/lightweight-charts.standalone.production.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+</head>
+<body>
+    <div class="header">
+        <button class="back-btn" onclick="goBack()">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back
+        </button>
+        <span id="balance">$10,000.00</span>
+    </div>
+
+    <div class="container">
+        <div class="coin-details">
+            <div class="coin-header">
+                <div class="coin-icon" id="coin-icon"></div>
+                <div class="coin-info">
+                    <div class="coin-name" id="coin-name"></div>
+                    <div class="coin-ticker" id="coin-ticker"></div>
+                </div>
+            </div>
+
+            <div class="price-info">
+                <div class="current-price" id="current-price">$0.00000</div>
+                <div class="price-change" id="price-change">0.00%</div>
+            </div>
+
+            <div class="coin-stats">
+                <div class="stat-card">
+                    <div class="stat-title">Market Cap</div>
+                    <div class="stat-value" id="market-cap">$0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">24h Volume</div>
+                    <div class="stat-value" id="volume">$0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Circulating Supply</div>
+                    <div class="stat-value" id="supply">0</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div id="chart"></div>
+            </div>
+            
+            <!-- Profit Statistics below chart -->
+            <div class="profit-stats">
+                <div class="stat-item">
+                    <div class="stat-label">ROI</div>
+                    <div id="roi-value" class="stat-value">0.00%</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Win/Loss Ratio</div>
+                    <div id="winloss-ratio" class="stat-value">0:0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Avg. Trade Profit</div>
+                    <div id="avg-profit" class="stat-value">$0.00</div>
+                </div>
+            </div>
+            
+            <!-- PnL Container -->
+
+
+            <div class="trading-panel">
+                <div class="trade-form">
+                    <h3>Buy</h3>
+                    <div class="form-group">
+                        <label for="buy-amount">Amount (USD)</label>
+                        <input type="number" id="buy-amount" min="1" step="1" value="100">
+                    </div>
+                    <div class="form-group">
+                        <label for="buy-tokens">Tokens you will receive</label>
+                        <input type="text" id="buy-tokens" readonly>
+                    </div>
+                    <button class="btn btn-buy" onclick="buyCoin()">Buy</button>
+                </div>
+                <div class="trade-form">
+                    <h3>Sell</h3>
+                    <div class="form-group">
+                        <label for="sell-tokens">Tokens to sell</label>
+                        <input type="number" id="sell-tokens" min="1" step="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="sell-amount">USD you will receive</label>
+                        <input type="text" id="sell-amount" readonly>
+                    </div>
+                    <button class="btn btn-sell" onclick="sellCoin()">Sell</button>
+                </div>
+            </div>
+            
+
+        </div>
+    </div>
+
+    <script src="coin-details.js"></script>
+    <script>
+        // Theme support
+        if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+        
+        // Check for system preference if no theme is set
+        if (!localStorage.getItem('theme') && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
+</body>
+</html>

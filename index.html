@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUN | 2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-primary: #030303;
+            --bg-secondary: #0f0f11;
+            --bg-tertiary: #16161a;
+            --accent: #36BFFA;
+            --accent-gradient: linear-gradient(135deg, #36BFFA, #2563EB);
+            --text-primary: #f5f5f7;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.5);
+            --border: rgba(255, 255, 255, 0.08);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f5f5f7;
+            --bg-secondary: #fafafa;
+            --bg-tertiary: #ffffff;
+            --text-primary: #050505;
+            --text-secondary: rgba(0, 0, 0, 0.7);
+            --text-tertiary: rgba(0, 0, 0, 0.5);
+            --border: rgba(0, 0, 0, 0.08);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Pixelify Sans", sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+            background-color: rgba(3, 3, 3, 0.8);
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--accent);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            background: var(--accent-gradient);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--bg-tertiary);
+        }
+
+        /* Balance Card */
+        .balance-card {
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .balance-label {
+            color: var(--text-tertiary);
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .balance-amount {
+            font-feature-settings: "tnum";
+            font-variant-numeric: tabular-nums;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+        }
+
+        /* Button Styles */
+        .btn {
+            background: var(--accent-gradient);
+            color: #000;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: "Pixelify Sans", sans-serif;
+            letter-spacing: 0.025em;
+            font-size: 0.875rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(54, 191, 250, 0.3);
+        }
+
+        .btn-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Section Styles */
+        .section {
+            background-color: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(5px);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 0.025em;
+        }
+
+        .section-body {
+            padding: 1.5rem;
+        }
+
+        /* Grid Layout */
+        .coin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Coin Card */
+        .coin-card {
+            background-color: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .coin-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(54, 191, 250, 0.2);
+            border-color: rgba(54, 191, 250, 0.3);
+        }
+
+        .coin-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .coin-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .coin-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .coin-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 1rem;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--bg-primary);
+        }
+
+        .coin-info {
+            flex-grow: 1;
+        }
+
+        .coin-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .coin-ticker {
+            color: var(--text-tertiary);
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+        }
+
+        .coin-price {
+            font-feature-settings: "tnum";
+            font-variant-numeric: tabular-nums;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .price-change {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .price-up {
+            background-color: rgba(52, 211, 153, 0.1);
+            color: rgb(52, 211, 153);
+        }
+
+        .price-down {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: rgb(239, 68, 68);
+        }
+
+        .coin-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.875rem;
+        }
+
+        .stat-label {
+            color: var(--text-tertiary);
+        }
+
+        .stat-value {
+            font-feature-settings: "tnum";
+            font-variant-numeric: tabular-nums;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Message when portfolio is empty */
+        .empty-message {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--text-tertiary);
+        }
+
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: #000;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(54, 191, 250, 0.3);
+            transition: var(--transition);
+        }
+
+        .fab:hover {
+            transform: translateY(-4px) rotate(45deg);
+            box-shadow: 0 8px 20px rgba(54, 191, 250, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header {
+                padding: 1rem;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .coin-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo-image {
+    width: 124px; /* Adjust size as needed */
+    height: 124px; /* Adjust size as needed */
+    border-radius: 6px; /* Optional: if you want rounded corners */
+}
+        
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="64d476983a0427509c85f338f03393e8 (1).png" alt="CryptoSim Logo" class="logo-image">
+            <span>Fun Platform</span>
+        </div>
+        <div class="nav-controls">
+            <div class="balance-card">
+                <div>
+                    <div class="balance-label">Balance</div>
+                    <div class="balance-amount" id="balance">$10,000.00</div>
+                </div>
+            </div>
+            <!-- Add Twitter, Telegram, CA, and Buy Now links -->
+            <a href="https://x.com/Fun_Platform_" target="_blank" class="btn btn-secondary">
+                <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                </svg>
+                Twitter
+            </a>
+            <a href="https://t.me/funplatformm" target="_blank" class="btn btn-secondary">
+                <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+                </svg>
+                Telegram
+            </a>
+            <div class="btn btn-secondary" onclick="copyContractAddress()">
+                <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+                CA: HERE...
+            </div>
+            <a href="https://pump.fun/profile/86y32UDE1HW2LajPzjzQ8NH5fRQLduFuKqPmG59KUUUB" target="_blank" class="btn">
+                <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+                Buy Now
+            </a>
+            <button class="btn btn-secondary" onclick="showPortfolio()">
+                <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                </svg>
+                Portfolio
+            </button>
+            <button class="theme-toggle" id="theme-toggle">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="section" id="portfolio-section">
+            <div class="section-header">
+                <h2 class="section-title">Your Portfolio</h2>
+            </div>
+            <div class="section-body">
+                <div id="portfolio-list">
+                    <!-- Portfolio items will be added here -->
+                    <div class="empty-message">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 7V12L15 15" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M3.05 11C3.27161 6.68915 6.71827 3.27161 11.0291 3.05C16.9234 2.74565 21.7454 7.56756 21.441 13.462C21.2194 17.7728 17.7728 21.2194 13.462 21.441C7.56756 21.7454 2.74565 16.9234 3.05 11.0291V11Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <p>No assets in your portfolio yet.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Pulse</h2>
+                <button class="btn" onclick="generateNewCoins()">
+                    <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                    </svg>
+                    Refresh
+                </button>
+            </div>
+        
+            <!-- Bitcoin (BTC) Card -->
+            <div class="coin-card" onclick="openCoinDetails('BTC')">
+                <div class="coin-header">
+                    <div class="coin-icon">FUN</div>
+                    <div class="coin-info">
+                        <div class="coin-name">FUNFUNFUN</div>
+                        <div class="coin-ticker">FUN</div>
+                    </div>
+                </div>
+                <div class="coin-price">$47,628.53</div>
+                <div class="price-change price-up">+2.8%</div>
+                <div class="coin-stats">
+                    <div class="stat-row">
+                        <div class="stat-label">Market Cap</div>
+                        <div class="stat-value">$913.4B</div>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-label">Volume (24h)</div>
+                        <div class="stat-value">$27.1B</div>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-label">Supply</div>
+                        <div class="stat-value">19.18M</div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Ethereum (ETH) Card -->
+            <div class="coin-card" onclick="openCoinDetails('ETH')">
+                <div class="coin-header">
+                    <div class="coin-icon">GAY</div>
+                    <div class="coin-info">
+                        <div class="coin-name">Trump is gay</div>
+                        <div class="coin-ticker">GAY</div>
+                    </div>
+                </div>
+                <div class="coin-price">$3,200.45</div>
+                <div class="price-change price-up">+1.5%</div>
+                <div class="coin-stats">
+                    <div class="stat-row">
+                        <div class="stat-label">Market Cap</div>
+                        <div class="stat-value">$384.2B</div>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-label">Volume (24h)</div>
+                        <div class="stat-value">$14.3B</div>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-label">Supply</div>
+                        <div class="stat-value">119.3M</div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Binance Coin (BNB) Card -->
+            <div class="coin-card" onclick="openCoinDetails('BNB')">
+                <div class="coin-header">
+                    <div class="coin-icon">love</div>
+                    <div class="coin-info">
+                        <div class="coin-name">i love the trenches</div>
+                        <div class="coin-ticker">love</div>
+                    </div>
+                </div>
+                <div class="coin-price">$420.67</div>
+                <div class="price-change price-down">-0.8%</div>
+                <div class="coin-stats">
+                    <div class="stat-row">
+                        <div class="stat-label">Market Cap</div>
+                        <div class="stat-value">$70.1B</div>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-label">Volume (24h)</div>
+                        <div class="stat-value">$2.1B</div>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-label">Supply</div>
+                        <div class="stat-value">166.8M</div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Cardano (ADA) Card -->
+            <div class="coin-card" onclick="openCoinDetails('ADA')">
+                <div class="coin-header">
+                    <div class="coin-icon">RUG</div>
+                    <div class="coin-info">
+                        <div class="coin-name">RUG PULL DONT BUY</div>
+                        <div class="coin-ticker">RUG</div>
+                    </div>
+                </div>
+                <div class="coin-price">$1.25</div>
+                <div class="price-change price-up">+3.2%</div>
+                <div class="coin-stats">
+                    <div class="stat-row">
+                        <div class="stat-label">Market Cap</div>
+                        <div class="stat-value">$40.3B</div>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-label">Volume (24h)</div>
+                        <div class="stat-value">$1.8B</div>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-label">Supply</div>
+                        <div class="stat-value">32.0B</div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Solana (SOL) Card -->
+            <div class="coin-card" onclick="openCoinDetails('SOL')">
+                <div class="coin-header">
+                    <div class="coin-icon">SOL</div>
+                    <div class="coin-info">
+                        <div class="coin-name">Solana is home</div>
+                        <div class="coin-ticker">SOL</div>
+                    </div>
+                </div>
+                <div class="coin-price">$150.75</div>
+                <div class="price-change price-down">-1.2%</div>
+                <div class="coin-stats">
+                    <div class="stat-row">
+                        <div class="stat-label">Market Cap</div>
+                        <div class="stat-value">$47.5B</div>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-label">Volume (24h)</div>
+                        <div class="stat-value">$3.4B</div>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-label">Supply</div>
+                        <div class="stat-value">315.6M</div>
+                    </div>
+                </div>
+            </div>
+        
+        </section>
+    </div>
+
+    <button class="fab" onclick="window.location.href='leaderboard.html'">
+        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+        </svg>
+    </button>
+
+    <script src="app.js"></script>
+    <script>
+        // Theme toggle functionality
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+            if (document.documentElement.getAttribute('data-theme') === 'light') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                this.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                this.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>';
+            }
+        });
+
+        // Check for system preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+            document.documentElement.setAttribute('data-theme', 'light');
+            document.getElementById('theme-toggle').innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>';
+        }
+    </script>
+    <script>
+        function openCoinDetails(coinId) {
+            localStorage.setItem('selectedCoinId', coinId);
+            window.location.href = 'coin-details.html';
+        }
+
+        function copyContractAddress() {
+    const contractAddress = "HERE..."; // Replace with your actual contract address
+    navigator.clipboard.writeText(contractAddress).then(() => {
+        alert("CA COPIED HAVE FUN");
+    }).catch(err => {
+        console.error("Failed to copy contract address: ", err);
+    });
+}
+    </script>
+</body>
+</html>
